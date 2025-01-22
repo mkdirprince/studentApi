@@ -42,6 +42,9 @@ importers:
       drizzle-kit:
         specifier: ^0.30.2
         version: 0.30.2
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.10.7)(typescript@5.7.3)
@@ -784,6 +787,11 @@ packages:
   http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
+
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -1669,6 +1677,8 @@ snapshots:
       setprototypeof: 1.2.0
       statuses: 2.0.1
       toidentifier: 1.0.1
+
+  husky@9.1.7: {}
 
   iconv-lite@0.4.24:
     dependencies:
