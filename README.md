@@ -39,8 +39,10 @@ pnpm dev
 
 ## API Endpoints
 
-- GET /v1/api/students - Get all students
-- GET /v1/api/students/:id - Get student by ID
-- POST /v1/api/students - Create new student
-- PUT /v1/api/students/:id - Update student
-- DELETE /v1/api/students/:id - Delete student
+| Method     | Endpoint               | Description                                  |
+| ---------- | ---------------------- | -------------------------------------------- |
+| **GET**    | `/v1/api/students`     | Retrieve a list of all students.             |
+| **GET**    | `/v1/api/students/:id` | Retrieve details of a student by ID.         |
+| **POST**   | `/v1/api/students`     | Add a new student to the database.           |
+| **PUT**    | `/v1/api/students/:id` | Update details of an existing student by ID. |
+| **DELETE** | `/v1/api/students/:id` | Remove a student by ID.                      |
