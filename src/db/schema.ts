@@ -2,7 +2,7 @@ import { pgTable, text } from "drizzle-orm/pg-core";
 import { v1 as uuid7 } from "uuid";
 
 const createPrefix = (table: string) => {
-	return `${table}_${uuid7}`;
+	return `${table}_${uuid7()}`;
 };
 
 export const students = pgTable("students", {
@@ -12,6 +12,6 @@ export const students = pgTable("students", {
 	firstName: text().notNull(),
 	lastName: text().notNull(),
 	email: text().notNull().unique(),
-	passwordHash: text().notNull().unique(),
+	passwordHash: text().notNull(),
 	programme: text().notNull(),
 });

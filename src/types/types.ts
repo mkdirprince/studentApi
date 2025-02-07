@@ -1,5 +1,5 @@
-import { studentSchema } from "../models/studentSchema";
-import { newStudentSchema } from "../models/studentSchema";
+import { studentSchema } from "../api/v1/models/studentSchema";
+import { newStudentSchema } from "../api/v1/models/studentSchema";
 import { z } from "zod";
 
 export type Student = z.infer<typeof studentSchema>;

@@ -1,7 +1,7 @@
-import { students } from "../db/schema";
-import { db } from "../db/db";
+import { students } from "../../../db/schema";
+import { db } from "../../../db/db";
 import bcrypt from "bcrypt";
-import { NewStudent } from "../types/types";
+import { NewStudent } from "../../../types/types";
 import { eq } from "drizzle-orm";
 
 const createPasswordHash = async (password: string) => {
