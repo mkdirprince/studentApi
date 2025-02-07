@@ -5,82 +5,82 @@ import { newStudentSchema } from "../models/studentSchema";
 const studentRouter = Router();
 
 studentRouter.get(
-  "/",
-  async (_req, res: Response<Student[]>, next: NextFunction) => {
-    try {
-      const students = await studentService.getAllStudents();
-      res.json(students);
-    } catch (error) {
-      next(error);
-    }
-  }
+	"/",
+	async (_req, res: Response<Student[]>, next: NextFunction) => {
+		try {
+			const students = await studentService.getAllStudents();
+			res.json(students);
+		} catch (error) {
+			next(error);
+		}
+	},
 );
 
 studentRouter.get(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const id = req.params.id;
+	"/:id",
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const id = req.params.id;
 
-      const student = await studentService.getStudent(id);
+			const student = await studentService.getStudent(id);
 
-      if (!student) {
-        res.status(404).json({ error: "student not found" });
-        return;
-      }
+			if (!student) {
+				res.status(404).json({ error: "student not found" });
+				return;
+			}
 
-      res.json(student);
-    } catch (error) {
-      next(error);
-    }
-  }
+			res.json(student);
+		} catch (error) {
+			next(error);
+		}
+	},
 );
 
 studentRouter.put(
-  "/:id",
-  async (req: Request, res: Response<Student>, next: NextFunction) => {
-    try {
-      const id = req.params.id;
-      const body = req.body;
+	"/:id",
+	async (req: Request, res: Response<Student>, next: NextFunction) => {
+		try {
+			const id = req.params.id;
+			const body = req.body;
 
-      const parsedStudent = newStudentSchema.parse(body);
+			const parsedStudent = newStudentSchema.parse(body);
 
-      const updatedStudent = await studentService.updateStudent(
-        id,
-        parsedStudent
-      );
+			const updatedStudent = await studentService.updateStudent(
+				id,
+				parsedStudent,
+			);
 
-      res.json(updatedStudent);
-    } catch (error) {
-      next(error);
-    }
-  }
+			res.json(updatedStudent);
+		} catch (error) {
+			next(error);
+		}
+	},
 );
 
 studentRouter.post("/", async (req, res, next) => {
-  try {
-    const body = req.body;
+	try {
+		const body = req.body;
 
-    const parsedStudent = newStudentSchema.parse(body);
+		const parsedStudent = newStudentSchema.parse(body);
 
-    const savedStudent = await studentService.addStudent(parsedStudent);
+		const savedStudent = await studentService.addStudent(parsedStudent);
 
-    res.status(201).json(savedStudent);
-  } catch (error) {
-    next(error);
-  }
+		res.status(201).json(savedStudent);
+	} catch (error) {
+		next(error);
+	}
 });
 
 studentRouter.delete(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const id = req.params.id;
+	"/:id",
+	async (req: Request, res: Response, next: NextFunction) => {
+		const id = req.params.id;
 
-    try {
-      await studentService.removeStudent(id);
-      res.status(204).end();
-    } catch (error) {
-      next(error);
-    }
-  }
+		try {
+			await studentService.removeStudent(id);
+			res.status(204).end();
+		} catch (error) {
+			next(error);
+		}
+	},
 );
