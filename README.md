@@ -31,7 +31,15 @@ pnpm install
 - Copy `.env.example` to `.env`
 - Update database credentials
 
-### 4.. Start the Development Server
+### 4. Set up postgres database
+
+You can use docker to start a progres docker image and connect your app to it
+
+```bash
+docker run -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 postgres
+```
+
+### 5. Start the Development Server
 
 ```bash
 pnpm dev
