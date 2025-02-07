@@ -6,7 +6,9 @@ const createPrefix = (table: string) => {
 };
 
 export const students = pgTable("students", {
-	id: text().$defaultFn(() => createPrefix("student")),
+	id: text()
+		.notNull()
+		.$defaultFn(() => createPrefix("student")),
 	firstName: text().notNull(),
 	lastName: text().notNull(),
 	email: text().notNull().unique(),
