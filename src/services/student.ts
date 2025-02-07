@@ -1,81 +1,76 @@
 import { students } from "../db/schema";
 import { db } from "../db/db";
 import bcrypt from "bcrypt";
-import { NewStudent, StudentExist } from "../types/types";
+import { NewStudent } from "../types/types";
 import { eq } from "drizzle-orm";
 
 const createPasswordHash = async (password: string) => {
-	const saltRound = 10;
-	return await bcrypt.hash(password, saltRound);
+  const saltRound = 10;
+  return await bcrypt.hash(password, saltRound);
 };
 
 const returnedData = {
-	id: students.id,
-	firstName: students.firstName,
-	lastName: students.lastName,
-	email: students.email,
-	programme: students.programme,
+  id: students.id,
+  firstName: students.firstName,
+  lastName: students.lastName,
+  email: students.email,
+  programme: students.programme,
 };
 
 const getAllStudents = async () => {
-	const allStudents = await db.select(returnedData).from(students);
+  const allStudents = await db.select(returnedData).from(students);
 
-	return allStudents;
+  return allStudents;
 };
 
 const getStudent = async (id: string) => {
-	const student = await db
-		.select(returnedData)
-		.from(students)
-		.where(eq(students.id, id));
+  const [student] = await db
+    .select(returnedData)
+    .from(students)
+    .where(eq(students.id, id));
 
-	return student;
+  return student;
 };
 
-const updateStudent = async (
-	id: string,
-	object: StudentExist,
-): Promise<StudentExist | null> => {
-	const results = await db
-		.update(students)
-		.set(object)
-		.where(eq(students.id, id))
-		.returning(returnedData);
+const updateStudent = async (id: string, object: NewStudent) => {
+  const [updatedStudent] = await db
+    .update(students)
+    .set(object)
+    .where(eq(students.id, id))
+    .returning(returnedData);
 
-	return results.length > 0 ? results[0] : null;
+  return updatedStudent;
 };
 
 const addStudent = async (object: NewStudent) => {
-	const { password, ...updateStudent } = object;
+  const { password, ...updateStudent } = object;
 
-	const passwordHash = await createPasswordHash(password);
+  const passwordHash = await createPasswordHash(password);
 
-	const newObject = {
-		...updateStudent,
-		passwordHash,
-	};
+  const newObject = {
+    ...updateStudent,
+    passwordHash,
+  };
 
-	const savedStudent = await db
-		.insert(students)
-		.values(newObject)
-		.returning(returnedData);
+  const [savedStudent] = await db
+    .insert(students)
+    .values(newObject)
+    .returning(returnedData);
 
-	return savedStudent.length > 0 ? savedStudent[0] : null;
+  return savedStudent;
 };
 
 const removeStudent = async (id: string) => {
-	const deletedStudent = await db
-		.delete(students)
-		.where(eq(students.id, id))
-		.returning({ id: students.id });
-
-	return deletedStudent.length > 0 ? deletedStudent[0] : null;
+  await db
+    .delete(students)
+    .where(eq(students.id, id))
+    .returning({ id: students.id });
 };
 
 export default {
-	getAllStudents,
-	getStudent,
-	updateStudent,
-	addStudent,
-	removeStudent,
+  getAllStudents,
+  getStudent,
+  updateStudent,
+  addStudent,
+  removeStudent,
 };
