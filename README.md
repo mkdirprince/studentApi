@@ -39,7 +39,19 @@ You can use docker to start a progres docker image and connect your app to it
 docker run -e POSTGRES_PASSWORD=[yourpassword] -p 5432:5432 postgres
 ```
 
-### 5. Start the Development Server
+### 6. Push testing database schema
+
+```bash
+pnpm run db:push:test
+```
+
+### 7. Test api
+
+```bash
+pnpm test
+```
+
+### 8. Start the Development Server
 
 ```bash
 pnpm dev

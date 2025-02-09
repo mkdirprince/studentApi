@@ -1,7 +1,7 @@
 import {
-  newStudentSchema,
-  studentSchema,
-  updateStudentSchema,
+	newStudentSchema,
+	studentSchema,
+	updateStudentSchema,
 } from "../api/v1/models/studentSchema";
 import { z } from "zod";
 

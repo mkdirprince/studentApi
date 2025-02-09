@@ -4,13 +4,13 @@ import config from "../utils/config";
 import * as schema from "./schema";
 
 const url =
-  process.env.NODE_ENV === "test"
-    ? config.TEST_POSTGRES_URL
-    : config.POSTGRES_URL;
+	process.env.NODE_ENV === "test"
+		? config.TEST_POSTGRES_URL
+		: config.POSTGRES_URL;
 
 export const client = postgres(url as string);
 
 export const db = drizzle(client, {
-  schema,
-  logger: process.env.NODE_ENV === "development",
+	schema,
+	logger: process.env.NODE_ENV === "development",
 });
