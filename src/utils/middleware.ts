@@ -39,7 +39,7 @@ const errorHandler = (
 			res.status(400).json({ error: error.message });
 		} else {
 			res.status(500).json({
-				error: "",
+				error: "unexpected error whiel connecting to database",
 			});
 		}
 	} else if (error instanceof Error) {
