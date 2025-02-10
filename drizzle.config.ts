@@ -6,7 +6,8 @@ export default defineConfig({
   schema: "./src/db/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    host: "localhost",
+    host: "postgres",
+    port: 5432,
     url: config.POSTGRES_URL,
     user: "postgres",
     password: config.POSTGRES_PASSWORD,

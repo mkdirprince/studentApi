@@ -7,6 +7,7 @@ export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     host: "localhost",
+    port: 5432,
     url: config.TEST_POSTGRES_URL,
     user: "postgres",
     password: config.TEST_POSTGRES_PASSWORD,

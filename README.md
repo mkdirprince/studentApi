@@ -10,6 +10,7 @@ A simple Node.js project using Node/Express,TypeScript and Postgres managed with
 - [Typescript](https://www.typescriptlang.org)
 - [Postgres](https://www.postgresql.org)
 - [DrizzleORM](https://orm.drizzle.team)
+- [Docker](https://www.docker.com)
 
 ## Setup Instructions
 
@@ -36,7 +37,7 @@ pnpm install
 You can use docker to start a progres docker image and connect your app to it
 
 ```bash
-docker run -e POSTGRES_PASSWORD=[yourpassword] -p 5432:5432 postgres
+docker compose -f docker-compose.dev.yml up -d
 ```
 
 ### 6. Push testing database schema
@@ -47,6 +48,8 @@ pnpm run db:push:test
 
 ### 7. Test api
 
+Ensure the database is up and running following from step 4.
+
 ```bash
 pnpm test
 ```
@@ -54,7 +57,23 @@ pnpm test
 ### 8. Start the Development Server
 
 ```bash
-pnpm dev
+pnpm run dev
+```
+
+## Production
+
+To run the app in production
+
+```bash
+tsc
+
+docker compose up -d
+```
+
+Check if the container is running
+
+```bash
+docker ps
 ```
 
 ## API Endpoints

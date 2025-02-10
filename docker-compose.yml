@@ -1,0 +1,28 @@
+services:
+  app:
+    image: stundent-api
+    build: .
+    ports:
+      - 3001:3001
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+  postgres:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  migration:
+    image: stundent-api
+    depends_on:
+      - postgres
+    command: pnpm db:migrate
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  pgdata:
